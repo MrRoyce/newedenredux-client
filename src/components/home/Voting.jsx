@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 //import HomeActions from '../actions/HomeActions';
 //import {first, without, findWhere} from 'underscore';
 
-class Home extends React.Component {
+class Voting extends React.Component {
 
   constructor (props) {
     super(props);
@@ -28,17 +28,20 @@ class Home extends React.Component {
   handleClick (character) {
     const winner = character.characterId,
           loser = first(without(this.state.characters, findWhere(this.state.characters, { characterId: winner }))).characterId;
-    HomeActions.vote(winner, loser);
+    HomeActions.pair(winner, loser);
   }*/
 
-  handleClick (character) {}
+  /*handleClick (character) {
+    console.log('character clicked!');
+    console.log(JSON.stringify(character));
+  }*/
 
   render () {
-    const characterNodes = this.props.characters.vote.map((character, index) => {
+    const characterNodes = this.props.pair.map((character, index) => {
       return (
         <div key={character.characterId} className={index === 0 ? 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1' : 'col-xs-6 col-sm-6 col-md-5'}>
           <div className='thumbnail fadeInUp animated'>
-            <img onClick={this.handleClick.bind(this, character)} src={'http://image.eveonline.com/Character/' + character.characterId + '_512.jpg'}/>
+            <img className='imgThumb' onClick={() => this.props.vote(character)} src={'http://image.eveonline.com/Character/' + character.characterId + '_512.jpg'}/>
             <div className='caption text-center'>
               <ul className='list-inline'>
                 <li><strong>Race:</strong> {character.race}</li>
@@ -64,4 +67,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Voting;
