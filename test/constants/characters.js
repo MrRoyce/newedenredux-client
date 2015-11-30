@@ -129,5 +129,23 @@ export const Characters = {
             "losses": 80,
             "wins": 61
         }
-    ]
+    ],
+    "character": {
+        "_id": "524b3bbd385965ef18002e8e",
+        "__v": 871,
+        "bloodline": "Jin-Mei",
+        "characterId": "892348579",
+        "gender": "Female",
+        "name": "Kaiko Nakorim",
+        "race": "Gallente",
+        "random": [
+            0.7866132673807442,
+            0
+        ],
+        "wrongGender": true,
+        "voted": false,
+        "reports": 3,
+        "losses": 186,
+        "wins": 676
+    }
 };

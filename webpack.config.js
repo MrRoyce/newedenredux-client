@@ -1,8 +1,12 @@
 const path = require('path');
 
 const webpack = require('webpack'),
-      ExtractTextPlugin = require('extract-text-webpack-plugin'),
-      BowerWebpackPlugin = require("bower-webpack-plugin");
+      ExtractTextPlugin = require('extract-text-webpack-plugin')/*,
+      BowerWebpackPlugin = require("bower-webpack-plugin")*/;
+
+const devFlagPlugin = new webpack.DefinePlugin({
+        __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'false'))
+      });
 
 module.exports = {
   entry: [
@@ -63,7 +67,8 @@ module.exports = {
         $: "jquery",
         jQuery: "jquery"
     }),
-    new BowerWebpackPlugin()
+    //new BowerWebpackPlugin(),
+    devFlagPlugin
   ],
   resolve: {
     extensions: ['', '.js', '.jsx']

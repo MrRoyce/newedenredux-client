@@ -1,15 +1,17 @@
+'use strict';
+
 import React from 'react';
 import {Link} from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 //import NavbarStore from '../stores/NavbarStore';
 //import NavbarActions from '../actions/NavbarActions';
 
-class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
+export default React.createClass({
+  //constructor(props) {
+    //super(props);
     /*this.state = NavbarStore.getState();
     this.onChange = this.onChange.bind(this);*/
-  }
+  //}
 
   /*componentDidMount() {
     NavbarStore.listen(this.onChange);
@@ -54,6 +56,8 @@ class Navbar extends React.Component {
     }
   }*/
 
+  mixins: [PureRenderMixin],
+
   render() {
     return (
       <nav className='navbar navbar-default navbar-static-top'>
@@ -83,7 +87,7 @@ class Navbar extends React.Component {
         <div id='navbar' className='navbar-collapse collapse'>
           <form ref='searchForm' className='navbar-form navbar-left animated' >
             <div className='input-group'>
-              <input type='text' className='form-control' placeholder='' //{/*this.state.totalCharacters + ' characters'*/} value='' //{/*this.state.searchQuery} onChange={NavbarActions.updateSearchQuery*/}
+              <input type='text' className='form-control' placeholder={this.props.numCharacters + ' characters'} //{/*this.state.totalCharacters + ' characters'*/} value='' //{/*this.state.searchQuery} onChange={NavbarActions.updateSearchQuery*/}
               />
               <span className='input-group-btn'>
                 <button className='btn btn-default' ><span className='glyphicon glyphicon-search'></span></button>
@@ -215,6 +219,4 @@ class Navbar extends React.Component {
       </nav>
     );
   }
-}
-
-export default Navbar;
+});

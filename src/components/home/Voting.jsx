@@ -3,14 +3,16 @@ import {Link} from 'react-router';
 //import HomeStore from '../stores/HomeStore';
 //import HomeActions from '../actions/HomeActions';
 //import {first, without, findWhere} from 'underscore';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
+import { thumb } from '../../action_creators';
 
-class Voting extends React.Component {
+export default React.createClass({
 
-  constructor (props) {
-    super(props);
+  //constructor (props) {
+    //super(props);
     /*this.state = HomeStore.getState();
     this.onChange = this.onChange.bind(this);*/
-  }
+  //}
 
   /*componentDidMount () {
     HomeStore.listen(this.onChange);
@@ -36,19 +38,34 @@ class Voting extends React.Component {
     console.log(JSON.stringify(character));
   }*/
 
-  render () {
-    const characterNodes = this.props.pair.map((character, index) => {
+  mixins: [PureRenderMixin],
+
+/*
+ The 1st time this is invoked, the props hasn't been set yet,
+ so, return an empty array if nothing exists
+ */
+  getPair: function() {
+    return this.props.pair || [];
+  },
+
+   callReducer: (props, character) => {
+    props.dispatch(thumb(character));
+  },
+
+  render: function() {
+
+    const characterNodes = this.getPair().map((character, index) => {
       return (
-        <div key={character.characterId} className={index === 0 ? 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1' : 'col-xs-6 col-sm-6 col-md-5'}>
+        <div key={character.get('characterId')} className={index === 0 ? 'col-xs-6 col-sm-6 col-md-5 col-md-offset-1' : 'col-xs-6 col-sm-6 col-md-5'}>
           <div className='thumbnail fadeInUp animated'>
-            <img className='imgThumb' onClick={() => this.props.vote(character)} src={'http://image.eveonline.com/Character/' + character.characterId + '_512.jpg'}/>
+            <img className='imgThumb' onClick={() => this.props.vote(character)} src={'http://image.eveonline.com/Character/' + character.get('characterId') + '_512.jpg'}/>
             <div className='caption text-center'>
               <ul className='list-inline'>
-                <li><strong>Race:</strong> {character.race}</li>
-                <li><strong>Bloodline:</strong> {character.bloodline}</li>
+                <li><strong>Race:</strong> {character.get('race')}</li>
+                <li><strong>Bloodline:</strong> {character.get('bloodline')}</li>
               </ul>
               <h4>
-                <Link to={'/characters/' + character.characterId}><strong>{character.name}</strong></Link>
+                <Link onClick={() => this.callReducer(this.props, character)} to={'/characters/' + character.get('characterId')}><strong>{character.get('name')}</strong></Link>
               </h4>
             </div>
           </div>
@@ -65,6 +82,4 @@ class Voting extends React.Component {
       </div>
     );
   }
-}
-
-export default Voting;
+});

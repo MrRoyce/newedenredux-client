@@ -4,15 +4,16 @@
 import React from 'react';
 import {Link} from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import { thumb } from '../../action_creators';
 //import FooterStore from '../stores/FooterStore';
 //import FooterActions from '../actions/FooterActions';
 
-class Footer extends React.Component {
-  constructor (props) {
-    super(props);
+export default React.createClass({
+  //constructor (props) {
+    //super(props);
     /*this.state = FooterStore.getState();
     this.onChange = this.onChange.bind(this);*/
-  }
+  //}
 
   /*componentDidMount () {
     FooterStore.listen(this.onChange);
@@ -26,13 +27,28 @@ class Footer extends React.Component {
   onChange (state) {
     this.setState(state);
   }*/
+  mixins: [PureRenderMixin],
+
+/*
+ The 1st time this is invoked, the props hasn't been set yet,
+ so, return an empty array if nothing exists
+ */
+  getTop5: function() {
+    return this.props.top5Characters || [];
+  },
+
+ // Not sure why had to pass props into the function
+ // it didn't work without it!  props was undefined??
+  callReducer: (props, character) => {
+    props.dispatch(thumb(character));
+  },
 
   render () {
-    const leaderboardCharacters = this.props.top5Characters.map((character) => {
+    const leaderboardCharacters = this.getTop5().map((character) => {
       return (
-        <li key={character.characterId}>
-          <Link to={'/characters/' + character.characterId}>
-            <img className='thumb-md' src={'http://image.eveonline.com/Character/' + character.characterId + '_128.jpg'} />
+        <li key={character.get('characterId')}>
+          <Link onClick={() => this.callReducer(this.props, character)}  to={'/characters/' + character.get('characterId')}>
+            <img className='thumb-md' src={'http://image.eveonline.com/Character/' + character.get('characterId') + '_128.jpg'} />
           </Link>
         </li>
       );
@@ -59,6 +75,4 @@ class Footer extends React.Component {
       </footer>
     );
   }
-}
-
-export default Footer;
+});
