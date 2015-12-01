@@ -25,7 +25,6 @@ export default React.createClass({
   }*/
 
   render () {
-    debugger;
     return (
       <div className='container'>
         <div className='panel panel-default'>

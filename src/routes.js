@@ -6,6 +6,7 @@ import App from './components/App';
 import {HomeContainer} from './components/home/Home';
 import {DetailContainer} from './components/character/Detail';
 import {StatsContainer} from './components/stats/Stats';
+import {ListContainer} from './components/lists/List';
 
 /*import Stats from './components/Stats';
 import Character from './components/Character';
@@ -18,9 +19,9 @@ export default (
     <Route path='/stats' component={StatsContainer} />
     <Route path='/characters/:id' component={DetailContainer} />
      <Route path='/add' component={HomeContainer} />
-    <Route path=':category' component={HomeContainer}>
-      <Route path=':race' component={HomeContainer}>
-        <Route path=':bloodline' component={HomeContainer} />
+    <Route path=':category' component={ListContainer}>
+      <Route path=':race' component={ListContainer}>
+        <Route path=':bloodline' component={ListContainer} />
       </Route>
     </Route>
 

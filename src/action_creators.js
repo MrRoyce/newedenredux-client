@@ -15,3 +15,11 @@ export function thumb(thumbnail) {
     thumbnail
   };
 }
+
+// Use the pathname from the router to get the correct list from entries
+export function list(pathname) {
+  return {
+    type: 'LIST',
+    pathname
+  };
+}

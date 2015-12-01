@@ -12,6 +12,14 @@ function thumb(state, entry) {
   return state.set('character', entry);
 }
 
+function list(state, pathname) {
+  // Temp just get 100 entries
+
+  var myList = state.get('characters').take(100);
+
+  return state.set('list', myList);
+}
+
 export default function entries(state = Map(), action) {
 
   switch (action.type) {
@@ -21,6 +29,9 @@ export default function entries(state = Map(), action) {
 
       case 'THUMB':
         return thumb(state, action.thumbnail);
+
+      case 'LIST':
+        return list(state, action.pathname);
 
       default:
         break;

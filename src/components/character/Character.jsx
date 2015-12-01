@@ -6,14 +6,14 @@ import $ from 'jquery';
 /*import CharacterStore from '../stores/CharacterStore';
 import CharacterActions from '../actions/CharacterActions';*/
 
-class Character extends React.Component {
-  constructor (props) {
-    super(props);
+export default React.createClass({
+  //constructor (props) {
+    //super(props);
     //this.state = this.props.character || []; //CharacterStore.getState();
     //this.onChange = this.onChange.bind(this);
-  }
+  //}
 
-  componentDidMount () {
+  //componentDidMount () {
     //CharacterStore.listen(this.onChange);
     //CharacterActions.getCharacter(this.props.params.id);
 
@@ -27,12 +27,16 @@ class Character extends React.Component {
         duration: 300
       }
     });*/
-  }
+  //}
+
+  componentWillMount: function() {
+    $(document.body).attr('class', 'profile ' + this.props.character.get('race').toLowerCase());
+  },
 
   componentWillUnmount () {
     //CharacterStore.unlisten(this.onChange);
     $(document.body).removeClass();
-  }
+  },
 /*
   componentDidUpdate (prevProps) {
     // Fetch new character data when URL path changes
@@ -81,6 +85,4 @@ class Character extends React.Component {
       </div>
     );
   }
-}
-
-export default Character;
+});
