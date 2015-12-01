@@ -12,11 +12,35 @@ function thumb(state, entry) {
   return state.set('character', entry);
 }
 
+function capitalise(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+// Filter the entries by the provided path parameters
 function list(state, pathname) {
-  // Temp just get 100 entries
 
-  var myList = state.get('characters').take(100);
+  var path   = pathname.split("/"),
+      myList = state.get('characters')
+        .filter((character) => {
+          switch (path[1]) {
 
+            case 'Male':
+            case 'Female':
+              return character.get('gender') === path[1];
+
+            default:
+              return true;
+          }
+        })
+        .filter((character) => {  // Check race filter
+            return (path[2]) ? character.get('race') === path[2] : true;
+        })
+        .filter((character) => {  // Check bloodline filter
+            return (path[3]) ? character.get('bloodline') === path[3] : true;
+        })
+        .sort((a, b) => b.get('wins') - a.get('wins'))
+        .take(100);
+  //debugger;  //path array 0: blank, 1: category(top, male, female, shame), 2: race, 3:bloodline
   return state.set('list', myList);
 }
 

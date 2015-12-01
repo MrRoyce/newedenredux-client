@@ -41,7 +41,7 @@ export default React.createClass({
  // it didn't work without it!  props was undefined??
  // probably because the call is in an ES6 type function and 'this'
  // ii not bound??
-  callReducer: (props, character) => {
+  storeClickedCharacter: (props, character) => {
     props.dispatch(thumb(character));
   },
 
@@ -49,7 +49,7 @@ export default React.createClass({
     const leaderboardCharacters = this.getTop5().map((character) => {
       return (
         <li key={character.get('characterId')}>
-          <Link onClick={() => this.callReducer(this.props, character)} to={'/characters/' + character.get('characterId')}>
+          <Link onClick={() => this.storeClickedCharacter(this.props, character)} to={'/characters/' + character.get('characterId')}>
             <img className='thumb-md' src={'http://image.eveonline.com/Character/' + character.get('characterId') + '_128.jpg'} />
           </Link>
         </li>

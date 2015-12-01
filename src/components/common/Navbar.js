@@ -2,16 +2,13 @@
 
 import React from 'react';
 import {Link} from 'react-router';
+import { list } from '../../action_creators';
+import {isEqual} from 'lodash';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 //import NavbarStore from '../stores/NavbarStore';
 //import NavbarActions from '../actions/NavbarActions';
 
 export default React.createClass({
-  //constructor(props) {
-    //super(props);
-    /*this.state = NavbarStore.getState();
-    this.onChange = this.onChange.bind(this);*/
-  //}
 
   /*componentDidMount() {
     NavbarStore.listen(this.onChange);
@@ -55,6 +52,26 @@ export default React.createClass({
       });
     }
   }*/
+
+  /*componentWillUnmount: function() { //1
+    console.log('componentWillUnmount triggered');
+  },*/
+
+  /*componentWillReceiveProps: function(nextProps) {  // 2
+    this.props.dispatch(list(nextProps.location.pathname));
+  },*/
+
+  /*componentWillUpdate: function() { // 3
+    console.log('componentWillUpdate triggered');
+  },*/
+
+  // Get the new list when a link is clicked
+  componentDidUpdate: function(prevProps) {  // 4
+   // console.log('componentDidUpdate triggered');
+    if (!isEqual(prevProps.location.pathname, this.props.location.pathname)) {
+      this.props.dispatch(list(this.props.location.pathname));
+    }
+  },
 
   mixins: [PureRenderMixin],
 
@@ -102,35 +119,35 @@ export default React.createClass({
               <ul className='dropdown-menu'>
                 <li><Link to='/top'>Top Overall</Link></li>
                 <li className='dropdown-submenu'>
-                  <Link to='/top/caldari'>Caldari</Link>
+                  <Link to='/top/Caldari'>Caldari</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/top/caldari/achura'>Achura</Link></li>
-                    <li><Link to='/top/caldari/civire'>Civire</Link></li>
-                    <li><Link to='/top/caldari/deteis'>Deteis</Link></li>
+                    <li><Link to='/top/Caldari/Achura'>Achura</Link></li>
+                    <li><Link to='/top/Caldari/Civire'>Civire</Link></li>
+                    <li><Link to='/top/Caldari/deteis'>Deteis</Link></li>
                   </ul>
                 </li>
                 <li className='dropdown-submenu'>
-                  <Link to='/top/gallente'>Gallente</Link>
+                  <Link to='/top/Gallente'>Gallente</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/top/gallente/gallente'>Gallente</Link></li>
-                    <li><Link to='/top/gallente/intaki'>Intaki</Link></li>
-                    <li><Link to='/top/gallente/jin-mei'>Jin-Mei</Link></li>
+                    <li><Link to='/top/Gallente/Gallente'>Gallente</Link></li>
+                    <li><Link to='/top/Gallente/Intaki'>Intaki</Link></li>
+                    <li><Link to='/top/Gallente/Jin-Mei'>Jin-Mei</Link></li>
                   </ul>
                 </li>
                 <li className='dropdown-submenu'>
-                  <Link to='/top/minmatar'>Minmatar</Link>
+                  <Link to='/top/Minmatar'>Minmatar</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/top/minmatar/brutor'>Brutor</Link></li>
-                    <li><Link to='/top/minmatar/sebiestor'>Sebiestor</Link></li>
-                    <li><Link to='/top/minmatar/vherokior'>Vherokior</Link></li>
+                    <li><Link to='/top/Minmatar/Brutor'>Brutor</Link></li>
+                    <li><Link to='/top/Minmatar/Sebiestor'>Sebiestor</Link></li>
+                    <li><Link to='/top/Minmatar/Vherokior'>Vherokior</Link></li>
                   </ul>
                 </li>
                 <li className='dropdown-submenu'>
-                  <Link to='/top/amarr'>Amarr</Link>
+                  <Link to='/top/Amarr'>Amarr</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/top/amarr/amarr'>Amarr</Link></li>
-                    <li><Link to='/top/amarr/ni-kunni'>Ni-Kunni</Link></li>
-                    <li><Link to='/top/amarr/khanid'>Khanid</Link></li>
+                    <li><Link to='/top/Amarr/Amarr'>Amarr</Link></li>
+                    <li><Link to='/top/Amarr/Ni-Kunni'>Ni-Kunni</Link></li>
+                    <li><Link to='/top/Amarr/Khanid'>Khanid</Link></li>
                   </ul>
                 </li>
                 <li className='divider'></li>
@@ -140,37 +157,37 @@ export default React.createClass({
             <li className='dropdown'>
               <a href='#' className='dropdown-toggle' data-toggle='dropdown'>Female <span className='caret'></span></a>
               <ul className='dropdown-menu'>
-                <li><Link to='/female'>All</Link></li>
+                <li><Link to='/Female'>All</Link></li>
                 <li className='dropdown-submenu'>
-                  <Link to='/female/caldari'>Caldari</Link>
+                  <Link to='/Female/Caldari'>Caldari</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/female/caldari/achura'>Achura</Link></li>
-                    <li><Link to='/female/caldari/civire/'>Civire</Link></li>
-                    <li><Link to='/female/caldari/deteis'>Deteis</Link></li>
+                    <li><Link to='/Female/Caldari/Achura'>Achura</Link></li>
+                    <li><Link to='/Female/Caldari/Civire/'>Civire</Link></li>
+                    <li><Link to='/Female/Caldari/deteis'>Deteis</Link></li>
                   </ul>
                 </li>
                 <li className='dropdown-submenu'>
-                  <Link to='/female/gallente'>Gallente</Link>
+                  <Link to='/Female/Gallente'>Gallente</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/female/gallente/gallente'>Gallente</Link></li>
-                    <li><Link to='/female/gallente/intaki'>Intaki</Link></li>
-                    <li><Link to='/female/gallente/jin-mei'>Jin-Mei</Link></li>
+                    <li><Link to='/Female/Gallente/Gallente'>Gallente</Link></li>
+                    <li><Link to='/Female/Gallente/Intaki'>Intaki</Link></li>
+                    <li><Link to='/Female/Gallente/Jin-Mei'>Jin-Mei</Link></li>
                   </ul>
                 </li>
                 <li className='dropdown-submenu'>
-                  <Link to='/female/minmatar'>Minmatar</Link>
+                  <Link to='/Female/Minmatar'>Minmatar</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/female/minmatar/brutor'>Brutor</Link></li>
-                    <li><Link to='/female/minmatar/sebiestor'>Sebiestor</Link></li>
-                    <li><Link to='/female/minmatar/vherokior'>Vherokior</Link></li>
+                    <li><Link to='/Female/Minmatar/Brutor'>Brutor</Link></li>
+                    <li><Link to='/Female/Minmatar/Sebiestor'>Sebiestor</Link></li>
+                    <li><Link to='/Female/Minmatar/Vherokior'>Vherokior</Link></li>
                   </ul>
                 </li>
                 <li className='dropdown-submenu'>
-                  <Link to='/female/amarr'>Amarr</Link>
+                  <Link to='/Female/Amarr'>Amarr</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/female/amarr/amarr'>Amarr</Link></li>
-                    <li><Link to='/female/amarr/ni-kunni'>Ni-Kunni</Link></li>
-                    <li><Link to='/female/amarr/khanid'>Khanid</Link></li>
+                    <li><Link to='/Female/Amarr/Amarr'>Amarr</Link></li>
+                    <li><Link to='/Female/Amarr/Ni-Kunni'>Ni-Kunni</Link></li>
+                    <li><Link to='/Female/Amarr/Khanid'>Khanid</Link></li>
                   </ul>
                 </li>
               </ul>
@@ -178,37 +195,37 @@ export default React.createClass({
             <li className='dropdown'>
               <a href='#' className='dropdown-toggle' data-toggle='dropdown'>Male <span className='caret'></span></a>
               <ul className='dropdown-menu'>
-                <li><Link to='/male'>All</Link></li>
+                <li><Link to='/Male'>All</Link></li>
                 <li className='dropdown-submenu'>
-                  <Link to='/male/caldari'>Caldari</Link>
+                  <Link to='/Male/Caldari'>Caldari</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/male/caldari/achura'>Achura</Link></li>
-                    <li><Link to='/male/caldari/civire'>Civire</Link></li>
-                    <li><Link to='/male/caldari/deteis'>Deteis</Link></li>
+                    <li><Link to='/Male/Caldari/Achura'>Achura</Link></li>
+                    <li><Link to='/Male/Caldari/Civire'>Civire</Link></li>
+                    <li><Link to='/Male/Caldari/deteis'>Deteis</Link></li>
                   </ul>
                 </li>
                 <li className='dropdown-submenu'>
-                  <Link to='/male/gallente'>Gallente</Link>
+                  <Link to='/Male/Gallente'>Gallente</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/male/gallente/gallente'>Gallente</Link></li>
-                    <li><Link to='/male/gallente/intaki'>Intaki</Link></li>
-                    <li><Link to='/male/gallente/jin-mei'>Jin-Mei</Link></li>
+                    <li><Link to='/Male/Gallente/Gallente'>Gallente</Link></li>
+                    <li><Link to='/Male/Gallente/Intaki'>Intaki</Link></li>
+                    <li><Link to='/Male/Gallente/Jin-Mei'>Jin-Mei</Link></li>
                   </ul>
                 </li>
                 <li className='dropdown-submenu'>
-                  <Link to='/male/minmatar'>Minmatar</Link>
+                  <Link to='/Male/Minmatar'>Minmatar</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/male/minmatar/brutor'>Brutor</Link></li>
-                    <li><Link to='/male/minmatar/sebiestor'>Sebiestor</Link></li>
-                    <li><Link to='/male/minmatar/vherokior'>Vherokior</Link></li>
+                    <li><Link to='/Male/Minmatar/Brutor'>Brutor</Link></li>
+                    <li><Link to='/Male/Minmatar/Sebiestor'>Sebiestor</Link></li>
+                    <li><Link to='/Male/Minmatar/Vherokior'>Vherokior</Link></li>
                   </ul>
                 </li>
                 <li className='dropdown-submenu'>
-                  <Link to='/male/amarr'>Amarr</Link>
+                  <Link to='/Male/Amarr'>Amarr</Link>
                   <ul className='dropdown-menu'>
-                    <li><Link to='/male/amarr/amarr'>Amarr</Link></li>
-                    <li><Link to='/male/amarr/ni-kunni'>Ni-Kunni</Link></li>
-                    <li><Link to='/male/amarr/khanid'>Khanid</Link></li>
+                    <li><Link to='/Male/Amarr/Amarr'>Amarr</Link></li>
+                    <li><Link to='/Male/Amarr/Ni-Kunni'>Ni-Kunni</Link></li>
+                    <li><Link to='/Male/Amarr/Khanid'>Khanid</Link></li>
                   </ul>
                 </li>
               </ul>

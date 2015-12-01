@@ -47,7 +47,9 @@ export default React.createClass({
     return myList;
   },
 
-  callReducer: (props, character) => {
+  // Call the reducer to put the character
+  // that was clicked in the state
+  storeClickedCharacter: (props, character) => {
     props.dispatch(thumb(character));
   },
 
@@ -59,13 +61,13 @@ export default React.createClass({
           <div className='media'>
             <span className='position pull-left'>{index + 1}</span>
             <div className='pull-left thumb-lg'>
-              <Link onClick={() => this.callReducer(this.props, character)} to={'/characters/' + character.get('characterId')}>
+              <Link onClick={() => this.storeClickedCharacter(this.props, character)} to={'/characters/' + character.get('characterId')}>
                 <img className='media-object' src={'http://image.eveonline.com/Character/' + character.get('characterId') + '_128.jpg'} />
               </Link>
             </div>
             <div className='media-body'>
               <h4 className='media-heading'>
-                <Link onClick={() => this.callReducer(this.props, character)} to={'/characters/' + character.get('characterId')}>{character.get('name')}</Link>
+                <Link onClick={() => this.storeClickedCharacter(this.props, character)} to={'/characters/' + character.get('characterId')}>{character.get('name')}</Link>
               </h4>
               <small>Race: <strong>{character.get('race')}</strong></small>
               <br />

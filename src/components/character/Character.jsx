@@ -3,21 +3,14 @@
 import React from 'react';
 require('magnific-popup');
 import $ from 'jquery';
-/*import CharacterStore from '../stores/CharacterStore';
-import CharacterActions from '../actions/CharacterActions';*/
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export default React.createClass({
-  //constructor (props) {
-    //super(props);
-    //this.state = this.props.character || []; //CharacterStore.getState();
-    //this.onChange = this.onChange.bind(this);
-  //}
 
-  //componentDidMount () {
-    //CharacterStore.listen(this.onChange);
-    //CharacterActions.getCharacter(this.props.params.id);
+  mixins: [PureRenderMixin],
 
-    /*$('.magnific-popup').magnificPopup({
+  componentDidMount () {
+    $('.magnific-popup').magnificPopup({
       type: 'image',
       mainClass: 'mfp-zoom-in',
       closeOnContentClick: true,
@@ -26,35 +19,24 @@ export default React.createClass({
         enabled: true,
         duration: 300
       }
-    });*/
-  //}
+    });
+  },
 
+  componentDidUpdate: function() {
+    this.componentWillMount();  // change the background
+  },
+
+  // Change the background
   componentWillMount: function() {
     $(document.body).attr('class', 'profile ' + this.props.character.get('race').toLowerCase());
   },
 
+  // Remove the background
   componentWillUnmount () {
-    //CharacterStore.unlisten(this.onChange);
     $(document.body).removeClass();
   },
-/*
-  componentDidUpdate (prevProps) {
-    // Fetch new character data when URL path changes
-    if (prevProps.params.id !== this.props.params.id) {
-      CharacterActions.getCharacter(this.props.params.id);
-    }
-  }*/
-
-  /*onChange (state) {
-    this.setState(state);
-  }*/
-
-  // temp removed
-  // onClick={CharacterActions.report.bind(this, this.state.characterId)}
-  // $(document.body).attr('class', 'profile ' + this.race.toLowerCase());
 
   render () {
-    //$(document.body).attr('class', 'profile ' + this.props.character.race.toLowerCase());
 
     return (
       <div className='container'>
